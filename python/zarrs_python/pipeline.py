@@ -117,10 +117,7 @@ class ZarrsCodecPipeline(CodecPipeline):
         chunks = await asyncio.to_thread(
             self.impl.retrieve_chunks, chunks_desc, chunk_concurrent_limit
         )
-        for chunk, chunk_info in zip(chunks, batch_info):
-            out_selection = chunk_info[3]
-            selection = chunk_info[2]
-            spec = chunk_info[1]
+        for chunk, (_, spec, selection, out_selection) in zip(chunks, batch_info):
             chunk_reshaped = chunk.view(spec.dtype).reshape(spec.shape)
             chunk_selected = chunk_reshaped[selection]
             if drop_axes:

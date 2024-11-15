@@ -24,6 +24,7 @@ At the moment, we rely on the python tests for correctness, so `pytest zarrs_pyt
 
 ## `ld/codec_pipeline` branch
 ```
+cargo run -q --bin stub_gen
 maturin develop -r
 ./examples/simple.py
 ```
